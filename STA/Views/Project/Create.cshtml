@@ -1,0 +1,32 @@
+﻿@model Sibers_test_app.Domain.Entities.Project
+
+<h2>Добавить проект</h2>
+<form asp-action="create" asp-controller="Project">
+    <p>
+        <label asp-for="Name">Название</label><br />
+        <input type="text" asp-for="Name" />
+    </p>
+    <p>
+        <label asp-for="CustomerCompanyName">Заказчик</label><br />
+        <input type="text" asp-for="CustomerCompanyName" />
+    </p>
+    <p>
+        <label asp-for="ExecutorCompanyName">Исполнитель</label><br />
+        <input type="text" asp-for="ExecutorCompanyName"/>
+    </p>
+    <p>
+        <label asp-for="StartDate">Дата начала</label><br />
+        <input type="date" asp-for="StartDate" />
+    </p>
+    <p>
+        <label asp-for="EndDate">Дата конца</label><br />
+        <input type="date" asp-for="EndDate"/>
+    </p>
+    <p>
+        <label asp-for="Priority">Приоритет</label><br />
+        <input type="number" asp-for="Priority" />
+    </p>
+    <p>
+        <input type="submit" value="Добавить" />
+    </p>
+</form>

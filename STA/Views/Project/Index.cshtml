@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Sibers_test_app.Domain.Entities.Project>
+
+<h2>Список проектов</h2>
+
+<table class="table">
+    <form method="get" asp-controller="Project" asp-action="Index">
+        <div>
+            <label>Название: </label>
+            <input name="name" value="@ViewData["name"]" />
+
+            <label>Приоритет: </label>
+            <input name="priority" type="number" value="@ViewData["priority"]" />
+
+            <label>Дата начала: </label>
+            <input name="startDate" type="date" value="@ViewData["stratdate"]" />
+
+            <label>Дата конца: </label>
+            <input name="EndDate" type="date" value="@ViewData["enddate"]" />
+
+            <input type="submit" value="Фильтр" />
+        </div>
+    </form>
+
+    <tr>
+        <th>
+            <a asp-action="Index" asp-controller="Project" asp-route-sortOrder="@ViewData["NameSort"]">Название</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-controller="Project" asp-route-sortOrder="@ViewData["CustomerSort"]">Заказчик</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-controller="Project" asp-route-sortOrder="@ViewData["ExecutorSort"]">Исполнитель</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-controller="Project" asp-route-sortOrder="@ViewData["StartDateSort"]">Дата начала</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-controller="Project" asp-route-sortOrder="@ViewData["EndDateSort"]">Дата окончания</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-controller="Project" asp-route-sortOrder="@ViewData["PrioritySort"]">Приоритет</a>
+        </th>
+        <th>Список сотрудников</th>
+        <th>Изменить</th>
+        <th>Удалить</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.CustomerCompanyName</td>
+            <td>@item.ExecutorCompanyName</td>
+            <td>@item.StartDate</td>
+            <td>@item.EndDate</td>
+            <td>@item.Priority</td>
+            <td>
+                <a asp-action="Employees" asp-controller="Project" asp-route-id="@item.Id">Список сотрудников</a>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-controller="Project" asp-route-id="@item.Id">Изменить</a>
+            </td>
+            <td>
+                <form asp-controller="Project" asp-action="Delete" method="post" asp-route-id="@item.Id">
+                    <input type="submit" value="Удалить" />
+                </form>
+            </td>
+        </tr>
+    }
+</table>

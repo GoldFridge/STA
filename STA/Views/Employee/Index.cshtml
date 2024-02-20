@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Sibers_test_app.Domain.Entities.Employee>
+
+<h2>Список сотрудников</h2>
+
+<table class="table">
+    <tr><th>Имя</th><th>Фамилия</th><th>Отчество</th><th>Email</th></tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>
+            <td>@item.MiddleName</td>
+            <td>@item.Email</td>
+            <td>
+                <a asp-action="ListOfProject" asp-controller="Employee" asp-route-id="@item.Id">Список проектов</a>
+            </td>
+            <td>
+                <a asp-action="Edit" asp-controller="Employee" asp-route-id="@item.Id">Изменить</a>
+            </td>
+            <td>
+                <form asp-controller="Employee" asp-action="Delete" method="post" asp-route-id="@item.Id">
+                    <input type="submit" value="Удалить" />
+                </form>
+            </td>
+
+        </tr>
+
+    }
+</table>

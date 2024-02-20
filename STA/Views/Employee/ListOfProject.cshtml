@@ -1,0 +1,20 @@
+﻿@model Sibers_test_app.Domain.Entities.Employee
+
+<h2>Список проектов сотрудника</h2>
+
+<table class="table">
+    <tr><th>Название</th><th>Заказчик</th><th>Исполнитель</th><th>Дата начала</th><th>Дата окончания</th><th>Приоритет</th></tr>
+    @foreach (var item in @Model.Projects)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.CustomerCompanyName</td>
+            <td>@item.ExecutorCompanyName</td>
+            <td>@item.StartDate</td>
+            <td>@item.EndDate</td>
+            <td>@item.Priority</td>
+        </tr>
+
+    }
+</table>
+

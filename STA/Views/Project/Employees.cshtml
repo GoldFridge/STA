@@ -1,0 +1,60 @@
+﻿@model Sibers_test_app.Domain.Entities.Project
+
+<h2>Список сотрудников на проекте</h2>
+
+<table class="table">
+    <tr><th>Имя</th><th>Фамилия</th><th>Отчество</th><th>Email</th></tr>
+    @foreach (var item in @Model.Employees)
+    {
+        <tr>
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>
+            <td>@item.MiddleName</td>
+            <td>@item.Email</td>
+            <td>
+                <form asp-controller="Project" asp-action="DeleteFromProject" method="post">
+                    <input type="hidden" name="id" value="@item.Id"/>
+                    <input type="hidden" name="projectId" value="@Model.Id" />
+                    <input type="submit" value="Удалить" />
+                </form>
+            </td>
+            @if (item.Id != Model.LeaderId)
+            {
+                <td>
+                    <form asp-controller="Project" asp-action="DoLeader" method="post">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <input type="hidden" name="projectId" value="@Model.Id" />
+                        <input type="submit" value="Сделать лидером" />
+                    </form>
+                </td>
+            }
+            else
+            {
+                <td>
+                    <form asp-controller="Project" asp-action="DoNoLeader" method="post">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <input type="hidden" name="projectId" value="@Model.Id" />
+                        <input type="submit" value="Убрать лидера" />
+                    </form>
+                </td>
+            }
+
+            @if (item.Id == Model.LeaderId)
+            {
+                <td>Лидер</td>
+            }
+
+        </tr>
+
+    }
+</table>
+
+
+<form asp-controller="Project" asp-action="AddToProject" method="post">
+    <p>
+        <label>Добавить сотрудника по Id</label><br />
+        <input type="number" name="id" />
+        <input type="hidden" name="projectId" value="@Model.Id" />
+        <input type="submit" value="Добавить" />
+    </p>
+</form>
